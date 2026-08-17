@@ -1,0 +1,44 @@
+.genlayer-spinner {
+  display: inline-block;
+  /* Ensures strokes scale perfectly at small/large sizes */
+  overflow: visible; 
+}
+
+.gen-layer {
+  fill: none;
+  stroke-width: 5;
+  stroke-linejoin: round;
+  /* 50px is the exact center of the 100x100 viewBox. Safer than 50% for Safari SVG support */
+  transform-origin: 50px 50px; 
+  animation: genLayerBreathe 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.gen-bot-layer {
+  stroke: url(#gen-grad-bot);
+  --gen-translate-y: 0px;
+  animation-delay: 0s;
+}
+
+.gen-mid-layer {
+  stroke: url(#gen-grad-mid);
+  --gen-translate-y: -6px;
+  animation-delay: 0.15s;
+}
+
+.gen-top-layer {
+  stroke: url(#gen-grad-top);
+  --gen-translate-y: -12px;
+  animation-delay: 0.3s;
+}
+
+@keyframes genLayerBreathe {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.25;
+  }
+  50% {
+    /* Layers pull apart vertically to reveal the 'stack', creating a dynamic gap */
+    transform: translateY(var(--gen-translate-y)) scale(1.02);
+    opacity: 1;
+  }
+}
